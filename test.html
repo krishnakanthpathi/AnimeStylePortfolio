@@ -1,0 +1,407 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Subject: Pathi Krishna Kanth | Public Disclosure</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link
+        href="https://fonts.googleapis.com/css2?family=IM+Fell+English:ital@0;1&family=UnifrakturMaguntia&family=Special+Elite&display=swap"
+        rel="stylesheet">
+    <style>
+        :root {
+            --parchment: #e8dcc5;
+            --parchment-dark: #d6c6a8;
+            --ink: #2b2b2b;
+            --wall-stone: #5a5a5a;
+            --scout-green: #1a3c26;
+            /* Survey Corps Green */
+            --blood-red: #8a1c1c;
+            --leather-brown: #4a3b2a;
+            --header-font: 'UnifrakturMaguntia', cursive;
+            --body-font: 'IM Fell English', serif;
+            --mono-font: 'Special Elite', monospace;
+        }
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        body {
+            background-color: #1a1a1a;
+            color: var(--ink);
+            font-family: var(--body-font);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+            padding: 20px;
+            background-image: url("data:image/svg+xml,%3Csvg width='60' height='60' viewBox='0 0 60 60' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='none' fill-rule='evenodd'%3E%3Cg fill='%23333333' fill-opacity='0.4'%3E%3Cpath d='M36 34v-4h-2v4h-4v2h4v4h2v-4h4v-2h-4zm0-30V0h-2v4h-4v2h4v4h2V6h4V4h-4zM6 34v-4H4v4H0v2h4v4h2v-4h4v-2H6zM6 4V0H4v4H0v2h4v4h2V6h4V4H6z'/%3E%3C/g%3E%3C/g%3E%3C/svg%3E");
+        }
+
+        /* --- THE WALL (CONTAINER) --- */
+        .wall-container {
+            width: 100%;
+            max-width: 1100px;
+            background-color: var(--parchment);
+            border: 8px double var(--leather-brown);
+            position: relative;
+            box-shadow: 0 0 50px rgba(0, 0, 0, 0.8);
+            overflow: hidden;
+        }
+
+        /* Parchment Texture Overlay */
+        .wall-container::before {
+            content: "";
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noiseFilter'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.65' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noiseFilter)' opacity='0.1'/%3E%3C/svg%3E");
+            opacity: 0.6;
+            pointer-events: none;
+            z-index: 0;
+        }
+
+        .content-layer {
+            position: relative;
+            z-index: 1;
+            padding: 40px;
+            display: grid;
+            grid-template-columns: 1fr;
+            gap: 30px;
+        }
+
+        @media (min-width: 900px) {
+            .content-layer {
+                grid-template-columns: 350px 1fr;
+                gap: 50px;
+            }
+        }
+
+        /* --- TYPOGRAPHY --- */
+        h1,
+        h2,
+        h3 {
+            font-family: var(--header-font);
+            color: var(--ink);
+            text-transform: uppercase;
+        }
+
+        .stamp-title {
+            font-size: 3rem;
+            line-height: 1;
+            margin-bottom: 10px;
+            text-align: center;
+            border-bottom: 3px solid var(--ink);
+            padding-bottom: 10px;
+        }
+
+        .section-header {
+            font-family: var(--mono-font);
+            font-weight: bold;
+            font-size: 1.2rem;
+            background: var(--ink);
+            color: var(--parchment);
+            padding: 5px 10px;
+            margin-top: 20px;
+            margin-bottom: 15px;
+            display: inline-block;
+            transform: skew(-10deg);
+        }
+
+        .section-header span {
+            display: inline-block;
+            transform: skew(10deg);
+            /* Counter skew text */
+        }
+
+        p,
+        li {
+            font-size: 1.1rem;
+            line-height: 1.4;
+            margin-bottom: 10px;
+        }
+
+        a {
+            color: var(--blood-red);
+            font-weight: bold;
+            text-decoration: none;
+            border-bottom: 1px dashed var(--blood-red);
+        }
+
+        /* --- INTERMISSION CARD STYLE (MIDDLE BORDER) --- */
+        .divider {
+            display: none;
+        }
+
+        @media (min-width: 900px) {
+            .divider {
+                display: block;
+                position: absolute;
+                left: 385px;
+                /* Adjust based on grid */
+                top: 40px;
+                bottom: 40px;
+                width: 4px;
+                background-color: var(--ink);
+                border-left: 2px solid var(--parchment);
+                border-right: 2px solid var(--parchment);
+            }
+        }
+
+        /* --- SIDEBAR (PROFILE) --- */
+        .profile-section {
+            text-align: center;
+            border: 2px solid var(--ink);
+            padding: 20px;
+            background: rgba(255, 255, 255, 0.3);
+            position: relative;
+        }
+
+        /* The "Public Disclosure" Badge */
+        .disclosure-badge {
+            font-family: var(--header-font);
+            font-size: 1.5rem;
+            color: var(--blood-red);
+            border: 3px solid var(--blood-red);
+            padding: 10px;
+            margin-bottom: 20px;
+            transform: rotate(-2deg);
+            display: inline-block;
+            background-color: rgba(138, 28, 28, 0.1);
+        }
+
+        .stat-block {
+            text-align: left;
+            margin-top: 20px;
+            font-family: var(--mono-font);
+            font-size: 0.9rem;
+            border-top: 1px solid var(--ink);
+            padding-top: 10px;
+        }
+
+        .stat-row {
+            display: flex;
+            justify-content: space-between;
+            margin-bottom: 5px;
+        }
+
+        .emblem-placeholder {
+            width: 120px;
+            height: 140px;
+            margin: 0 auto 20px;
+            border: 4px double var(--ink);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-family: var(--header-font);
+            font-size: 4rem;
+            color: rgba(0, 0, 0, 0.2);
+            background: var(--scout-green);
+            clip-path: polygon(0% 0%, 100% 0%, 100% 80%, 50% 100%, 0% 80%);
+        }
+
+        /* --- MAIN CONTENT (RIGHT) --- */
+        .mission-log {
+            padding-left: 0;
+        }
+
+        @media (min-width: 900px) {
+            .mission-log {
+                padding-left: 30px;
+            }
+        }
+
+        .entry-box {
+            margin-bottom: 25px;
+            border-left: 4px solid var(--leather-brown);
+            padding-left: 15px;
+        }
+
+        .entry-title {
+            font-size: 1.3rem;
+            font-weight: bold;
+            color: var(--scout-green);
+        }
+
+        .entry-meta {
+            font-family: var(--mono-font);
+            font-size: 0.85rem;
+            color: var(--blood-red);
+            margin-bottom: 5px;
+            display: block;
+        }
+
+        .tech-list {
+            font-family: var(--mono-font);
+            font-size: 0.8rem;
+            margin-top: 5px;
+            color: var(--wall-stone);
+        }
+
+        /* --- FOOTER --- */
+        .footer-stamp {
+            position: absolute;
+            bottom: 10px;
+            right: 20px;
+            font-family: var(--mono-font);
+            font-size: 0.7rem;
+            opacity: 0.6;
+            transform: rotate(-5deg);
+            border: 1px solid var(--ink);
+            padding: 2px 5px;
+        }
+
+        /* --- SKILL BARS --- */
+        .skill-container {
+            margin-top: 5px;
+            background: rgba(0, 0, 0, 0.1);
+            height: 8px;
+            width: 100%;
+            border: 1px solid var(--ink);
+        }
+
+        .skill-fill {
+            height: 100%;
+            background: var(--scout-green);
+            width: 0;
+            animation: fillBar 1.5s ease-out forwards;
+        }
+
+        @keyframes fillBar {
+            to {
+                width: var(--w);
+            }
+        }
+    </style>
+</head>
+
+<body>
+
+    <div class="wall-container">
+        <div class="divider"></div>
+
+        <div class="content-layer">
+
+            <aside class="profile-section">
+                <div class="disclosure-badge">
+                    Information<br>Available for<br>Public Disclosure
+                </div>
+
+                <div class="emblem-placeholder">⚔</div>
+
+                <h1 style="font-size: 2rem;">Pathi Krishna Kanth</h1>
+                <p style="font-family: var(--mono-font); font-size: 0.9rem;">Cadet Class: Final Year</p>
+                <p style="font-family: var(--mono-font); font-size: 0.9rem;">Affiliation: Pragati Eng. College</p>
+
+                <div class="stat-block">
+                    <h3 style="border-bottom: 1px solid; margin-bottom: 10px;">Combat Statistics</h3>
+
+                    <div class="stat-row">
+                        <span>CGPA (Intellect)</span>
+                        <strong>8.92 / 10</strong>
+                    </div>
+                    <div class="skill-container">
+                        <div class="skill-fill" style="--w: 89%"></div>
+                    </div>
+
+                    <div class="stat-row" style="margin-top: 10px;">
+                        <span>LeetCode Kills</span>
+                        <strong>1300+</strong>
+                    </div>
+                    <div class="skill-container">
+                        <div class="skill-fill" style="--w: 95%"></div>
+                    </div>
+
+                    <div class="stat-row" style="margin-top: 10px;">
+                        <span>Rank</span>
+                        <strong>Top 5%</strong>
+                    </div>
+
+                    <br>
+                    <h3 style="border-bottom: 1px solid; margin-bottom: 10px;">Equipment (Skills)</h3>
+                    <p style="font-size: 0.85rem;">
+                        <strong>Blades:</strong> Java, Python, PHP, JS, C<br>
+                        <strong>Gear:</strong> Vue.js, React, Node, AWS S3<br>
+                        <strong>Storage:</strong> MongoDB, MySQL
+                    </p>
+                </div>
+
+                <div style="margin-top: 30px; font-family: var(--mono-font); font-size: 0.8rem;">
+                    <strong>[CONTACT TRANSMISSION]</strong><br>
+                    <a href="mailto:krishnakanthpathi@gmail.com">Send Raven (Email)</a><br>
+                    <a href="https://krishnakanth.dev">Access Archives (Web)</a><br>
+                    <a href="https://www.linkedin.com/in/krishna-kanth-166b31252/">Alliance Records (LinkedIn)</a>
+                </div>
+            </aside>
+
+            <main class="mission-log">
+                <h1 class="stamp-title">Subject History</h1>
+
+                <div class="section-header"><span>EXPEDITION LOGS</span></div>
+
+                <div class="entry-box">
+                    <div class="entry-title">Full Stack Developer</div>
+                    <span class="entry-meta">CarTrade Tech (On-site) | Dec 2025 -- Present</span>
+                    <p>Current operation involves developing responsive web infrastructure using <strong>Vue.js</strong>
+                        and <strong>PHP</strong>. Ensuring the integrity of data storage within the Walls (MongoDB &
+                        MySQLi).</p>
+                </div>
+
+                <div class="entry-box">
+                    <div class="entry-title">AI Intern</div>
+                    <span class="entry-meta">Turtil (Remote) | 2025</span>
+                    <p>Assisted in the research and development of Artificial Intelligence models. Implemented
+                        efficiency protocols using Python to improve system performance.</p>
+                </div>
+
+                <div class="section-header"><span>ENGINEERING CORPS (PROJECTS)</span></div>
+
+                <div class="entry-box">
+                    <div class="entry-title">QueryPort <a href="https://github.com/krishnakanthpathi/QueryPort"
+                            style="font-size:0.7rem; margin-left:10px;">[BLUEPRINTS]</a></div>
+                    <span class="entry-meta">React 19, TS, Express, MongoDB</span>
+                    <p>A headless CMS platform with robust MVC architecture. Features a centralized API for dossier
+                        management (developer profiles).</p>
+                </div>
+
+                <div class="entry-box">
+                    <div class="entry-title">PHP Full Stack Modules</div>
+                    <span class="entry-meta">PHP, AWS S3, Hybrid DB</span>
+                    <p>Advanced backend mechanisms including dynamic pagination and hybrid database queries. Utilizes
+                        AWS S3 for secure cloud storage.</p>
+                </div>
+
+                <div class="entry-box">
+                    <div class="entry-title">Resume Fit Evaluation</div>
+                    <span class="entry-meta">NLP, Machine Learning</span>
+                    <p>An automated system for evaluating recruit suitability against mission requirements using Natural
+                        Language Processing.</p>
+                </div>
+
+                <div class="section-header"><span>COMMENDATIONS</span></div>
+                <ul
+                    style="list-style-type: square; padding-left: 20px; font-family: var(--mono-font); font-size: 0.9rem;">
+                    <li><strong>GDG Lead (Algo Domain):</strong> Led training exercises and coding contests for new
+                        cadets.</li>
+                    <li><strong>NPTEL Scholar:</strong> Ranked in the Top 1% (Elite Status) for Java DSA.</li>
+                    <li><strong>1st Prize:</strong> "Crack the Jumble Code" tactical problem solving.</li>
+                </ul>
+
+            </main>
+        </div>
+
+        <div class="footer-stamp">
+            OFFICIAL DOCUMENT<br>DO NOT DESTROY
+        </div>
+    </div>
+
+</body>
+
+</html>
