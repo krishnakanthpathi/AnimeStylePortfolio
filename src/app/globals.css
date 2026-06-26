@@ -1,0 +1,377 @@
+@import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;500;600;700&family=Playfair+Display:ital,wght@0,400;0,700;1,400&family=Share+Tech+Mono&display=swap');
+
+:root {
+  --nier-bg: #d1cdb8;
+  --nier-bg-light: #dad6c3;
+  --nier-bg-extra-light: #e5e2d3;
+  --nier-fg: #4e4b42;
+  --nier-fg-dim: #797566;
+  --nier-accent: #ab3c2d;
+  --nier-gold: #b39768;
+  --nier-border: #4e4b42;
+  --nier-border-dim: rgba(78, 75, 66, 0.4);
+  
+  --font-serif: 'Playfair Display', serif;
+  --font-mono: 'Share Tech Mono', monospace;
+  --font-sans: 'Montserrat', sans-serif;
+}
+
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+body {
+  background-color: var(--nier-bg);
+  color: var(--nier-fg);
+  font-family: var(--font-sans);
+  overflow-x: hidden;
+  position: relative;
+  min-height: 100vh;
+  /* Very subtle paper grain & halftone overlay */
+  background-image: 
+    radial-gradient(rgba(78, 75, 66, 0.05) 1px, transparent 1px),
+    linear-gradient(rgba(78, 75, 66, 0.02) 1px, transparent 1px);
+  background-size: 24px 24px, 100% 4px;
+}
+
+/* Subtle CRT monitor scanline animation */
+.scanlines {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(
+    rgba(18, 16, 16, 0) 50%, 
+    rgba(0, 0, 0, 0.05) 50%
+  ), linear-gradient(
+    90deg,
+    rgba(255, 0, 0, 0.01),
+    rgba(0, 255, 0, 0.005),
+    rgba(0, 0, 255, 0.01)
+  );
+  background-size: 100% 4px, 6px 100%;
+  z-index: 9999;
+  pointer-events: none;
+  opacity: 0.8;
+}
+
+.scanlines::after {
+  content: " ";
+  display: block;
+  position: absolute;
+  top: 0; left: 0; bottom: 0; right: 0;
+  background: rgba(18, 16, 16, 0.03);
+  opacity: 0;
+  z-index: 9999;
+  pointer-events: none;
+  animation: flicker 0.15s infinite;
+}
+
+/* Nier container layout */
+.nier-layout {
+  max-width: 1400px;
+  margin: 0 auto;
+  padding: 40px 20px;
+  position: relative;
+}
+
+/* Nier styled box with custom corner brackets and thin borders */
+.nier-box {
+  border: 1px solid var(--nier-border);
+  background-color: rgba(218, 214, 195, 0.6);
+  padding: 24px;
+  position: relative;
+  margin-bottom: 24px;
+  transition: all 0.3s cubic-bezier(0.25, 0.8, 0.25, 1);
+}
+
+.nier-box::before {
+  content: '';
+  position: absolute;
+  top: -4px;
+  left: -4px;
+  width: 10px;
+  height: 10px;
+  border-top: 2px solid var(--nier-border);
+  border-left: 2px solid var(--nier-border);
+}
+
+.nier-box::after {
+  content: '';
+  position: absolute;
+  bottom: -4px;
+  right: -4px;
+  width: 10px;
+  height: 10px;
+  border-bottom: 2px solid var(--nier-border);
+  border-right: 2px solid var(--nier-border);
+}
+
+.nier-box.interactive:hover {
+  background-color: var(--nier-border);
+  color: var(--nier-bg);
+  box-shadow: 0 10px 20px rgba(0, 0, 0, 0.15);
+}
+
+.nier-box.interactive:hover * {
+  color: var(--nier-bg) !important;
+  border-color: var(--nier-bg) !important;
+}
+
+/* Section Header styling */
+.nier-section-title {
+  font-family: var(--font-serif);
+  font-size: 1.8rem;
+  letter-spacing: 0.15em;
+  text-transform: uppercase;
+  margin-bottom: 20px;
+  display: flex;
+  align-items: center;
+  gap: 15px;
+  font-weight: 700;
+}
+
+.nier-section-title::after {
+  content: '';
+  flex-grow: 1;
+  height: 1px;
+  background-color: var(--nier-border);
+}
+
+.nier-section-title::before {
+  content: '■';
+  font-size: 0.8rem;
+  color: var(--nier-border);
+}
+
+/* Share Tech Mono sub-info */
+.telemetry {
+  font-family: var(--font-mono);
+  font-size: 0.85rem;
+  color: var(--nier-fg-dim);
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+}
+
+/* Skewed Buttons */
+.nier-btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  background: transparent;
+  color: var(--nier-fg);
+  border: 1px solid var(--nier-border);
+  padding: 10px 20px;
+  font-family: var(--font-mono);
+  font-size: 0.9rem;
+  text-transform: uppercase;
+  letter-spacing: 0.15em;
+  cursor: pointer;
+  position: relative;
+  overflow: hidden;
+  transition: all 0.3s;
+  text-decoration: none;
+}
+
+.nier-btn::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: -100%;
+  width: 100%;
+  height: 100%;
+  background-color: var(--nier-border);
+  transition: all 0.3s;
+  z-index: -1;
+}
+
+.nier-btn:hover {
+  color: var(--nier-bg);
+}
+
+.nier-btn:hover::before {
+  left: 0;
+}
+
+.nier-btn.active {
+  background-color: var(--nier-border);
+  color: var(--nier-bg);
+}
+
+/* Nier Grid System */
+.nier-grid {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 30px;
+}
+
+@media (min-width: 992px) {
+  .nier-grid {
+    grid-template-columns: 400px 1fr;
+  }
+}
+
+/* Chat HUD Terminal Styles */
+.chat-hud {
+  border: 2px solid var(--nier-border);
+  height: 600px;
+  display: flex;
+  flex-direction: column;
+  background-color: rgba(205, 201, 182, 0.4);
+  position: relative;
+}
+
+.chat-header {
+  border-bottom: 1px solid var(--nier-border);
+  padding: 12px 20px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  background-color: rgba(78, 75, 66, 0.05);
+}
+
+.chat-messages {
+  flex-grow: 1;
+  overflow-y: auto;
+  padding: 20px;
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+  scroll-behavior: smooth;
+  /* Thin styled scrollbar */
+}
+
+.chat-messages::-webkit-scrollbar {
+  width: 4px;
+}
+.chat-messages::-webkit-scrollbar-track {
+  background: transparent;
+}
+.chat-messages::-webkit-scrollbar-thumb {
+  background-color: var(--nier-border);
+}
+
+.chat-msg {
+  max-width: 85%;
+  padding: 12px 16px;
+  line-height: 1.5;
+  font-size: 0.95rem;
+  position: relative;
+  animation: slideUp 0.3s ease-out;
+}
+
+.chat-msg.assistant {
+  align-self: flex-start;
+  background-color: rgba(242, 239, 233, 0.95);
+  border-left: 4px solid var(--nier-border);
+  color: var(--nier-fg);
+}
+
+.chat-msg.user {
+  align-self: flex-end;
+  background-color: var(--nier-border);
+  color: var(--nier-bg);
+  border-right: 4px solid var(--nier-accent);
+}
+
+.chat-input-area {
+  border-top: 1px solid var(--nier-border);
+  padding: 15px;
+  background-color: rgba(218, 214, 195, 0.8);
+}
+
+.chat-form {
+  display: flex;
+  gap: 10px;
+}
+
+.chat-input {
+  flex-grow: 1;
+  background: rgba(242, 239, 233, 0.8);
+  border: 1px solid var(--nier-border);
+  color: var(--nier-fg);
+  padding: 12px 15px;
+  font-family: var(--font-sans);
+  font-size: 0.95rem;
+  outline: none;
+}
+
+.chat-input:focus {
+  border-color: var(--nier-gold);
+  background: white;
+}
+
+/* Animations */
+@keyframes flicker {
+  0% { opacity: 0.97; }
+  50% { opacity: 1; }
+  100% { opacity: 0.98; }
+}
+
+@keyframes slideUp {
+  from {
+    opacity: 0;
+    transform: translateY(10px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* Double lines decoration */
+.nier-double-line {
+  height: 4px;
+  border-top: 1px solid var(--nier-border);
+  border-bottom: 1px solid var(--nier-border);
+  margin: 15px 0;
+}
+
+/* Nier styled skills */
+.nier-skill-bar {
+  margin-bottom: 12px;
+}
+.nier-skill-label {
+  display: flex;
+  justify-content: space-between;
+  font-family: var(--font-mono);
+  font-size: 0.85rem;
+  margin-bottom: 4px;
+}
+.nier-skill-track {
+  height: 6px;
+  background: rgba(78, 75, 66, 0.15);
+  position: relative;
+}
+.nier-skill-fill {
+  height: 100%;
+  background: var(--nier-border);
+  transition: width 1s ease-out;
+}
+
+/* Hacking sound effect pulse indicator */
+.audio-pulse {
+  display: inline-flex;
+  gap: 3px;
+  align-items: center;
+  height: 12px;
+}
+
+.audio-pulse-bar {
+  width: 2px;
+  height: 100%;
+  background-color: var(--nier-border);
+  animation: pulseBar 0.8s ease-in-out infinite;
+}
+
+.audio-pulse-bar:nth-child(2) { animation-delay: 0.15s; }
+.audio-pulse-bar:nth-child(3) { animation-delay: 0.3s; }
+.audio-pulse-bar:nth-child(4) { animation-delay: 0.45s; }
+
+@keyframes pulseBar {
+  0%, 100% { transform: scaleY(0.3); }
+  50% { transform: scaleY(1); }
+}
