@@ -111,8 +111,15 @@ export default function ChatConsole() {
       const cleanText = text.replace(/[*#\-]/g, ' ').trim();
       
       const baseUrl = process.env.NEXT_PUBLIC_KOKORO_TTS_URL || 'http://localhost:8998';
+      const apiKey = process.env.NEXT_PUBLIC_KOKORO_API_KEY;
+      const headers = {};
+      if (apiKey) {
+        headers['X-API-Key'] = apiKey;
+      }
+      
       const response = await fetch(
-        `${baseUrl}/tts?text=${encodeURIComponent(cleanText.substring(0, 300))}&voice=af_heart&speed=1.0`
+        `${baseUrl}/tts?text=${encodeURIComponent(cleanText.substring(0, 300))}&voice=af_heart&speed=1.0`,
+        { headers }
       );
       
       if (!response.ok) throw new Error('Kokoro TTS service offline');
